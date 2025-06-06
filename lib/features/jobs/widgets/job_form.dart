@@ -1,7 +1,4 @@
-import 'package:afs_mock_project/features/jobs/providers/job_notifier.dart';
-import 'package:afs_mock_project/features/jobs/models/job_model.dart';
-import 'package:afs_mock_project/features/jobs/models/job_status.dart';
-import 'package:afs_mock_project/features/jobs/providers/selected_job_provider.dart';
+import 'package:afs_mock_project/features/jobs/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -12,8 +12,7 @@ class JobListScreen extends ConsumerWidget {
 
     return Column(
       children: [
-        const JobFilterBar(), // 🔍 + 🟢 filter bar
-
+        const JobFilterBar(),
         Expanded(
           child: jobs.isEmpty
               ? const Center(child: Text('No jobs match the criteria.'))
