@@ -93,9 +93,15 @@ class _JobFormState extends ConsumerState<JobForm> {
               Row(
                 children: [
                   ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        iconColor:
+                            Theme.of(context).appBarTheme.foregroundColor),
                     onPressed: _submit,
-                    icon: Icon(isEditing ? Icons.save : Icons.add,
-                        color: Colors.white),
+                    icon: Icon(
+                      isEditing ? Icons.save : Icons.add,
+                    ),
                     label: Text(isEditing ? 'Update Job' : 'Add Job'),
                   ),
                   const SizedBox(width: 8),
