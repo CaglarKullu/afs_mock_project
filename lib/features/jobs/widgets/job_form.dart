@@ -94,7 +94,8 @@ class _JobFormState extends ConsumerState<JobForm> {
                 children: [
                   ElevatedButton.icon(
                     onPressed: _submit,
-                    icon: Icon(isEditing ? Icons.save : Icons.add),
+                    icon: Icon(isEditing ? Icons.save : Icons.add,
+                        color: Colors.white),
                     label: Text(isEditing ? 'Update Job' : 'Add Job'),
                   ),
                   const SizedBox(width: 8),
