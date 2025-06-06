@@ -9,7 +9,7 @@ class FilterState {
 
   FilterState copyWith({
     String? searchQuery,
-    Object? status = _noChange, // magic default to support null
+    Object? status = _noChange,
   }) {
     return FilterState(
       searchQuery: searchQuery ?? this.searchQuery,

@@ -9,55 +9,76 @@ class JobFilterBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final filter = ref.watch(filterStateProvider);
     final filterNotifier = ref.read(filterStateProvider.notifier);
+    final chipTheme = Theme.of(context).chipTheme;
 
-    return Padding(
-      padding: const EdgeInsets.all(12),
+    return Container(
+      color: Theme.of(context).colorScheme.surface,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Search by title',
-              border: OutlineInputBorder(),
+              prefixIcon: const Icon(Icons.search),
             ),
             onChanged: (query) {
               filterNotifier.state = filter.copyWith(searchQuery: query);
             },
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 10,
+            runSpacing: 10,
             children: [
-              FilterChip(
-                label: const Text('All'),
+              _buildChip(
+                label: 'All',
                 selected: filter.status == null,
-                onSelected: (_) =>
+                onTap: () =>
                     filterNotifier.state = filter.copyWith(status: null),
+                chipTheme: chipTheme,
               ),
               ...JobStatus.values.map(
-                (status) => FilterChip(
-                  label: Text(status.label),
+                (status) => _buildChip(
+                  label: status.label,
                   selected: filter.status == status,
-                  onSelected: (_) =>
+                  onTap: () =>
                       filterNotifier.state = filter.copyWith(status: status),
+                  chipTheme: chipTheme,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Align(
             alignment: Alignment.centerRight,
             child: TextButton.icon(
-              onPressed: () {
-                filterNotifier.state = FilterState(); // reset
-              },
+              onPressed: () => filterNotifier.state = FilterState(),
               icon: const Icon(Icons.clear),
               label: const Text("Clear Filters"),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildChip({
+    required String label,
+    required bool selected,
+    required VoidCallback onTap,
+    required ChipThemeData chipTheme,
+  }) {
+    return FilterChip(
+      label: Text(
+        label,
+        style: selected ? chipTheme.secondaryLabelStyle : chipTheme.labelStyle,
+      ),
+      selected: selected,
+      selectedColor: chipTheme.selectedColor,
+      backgroundColor: chipTheme.backgroundColor,
+      shape: chipTheme.shape,
+      onSelected: (_) => onTap(),
     );
   }
 }
