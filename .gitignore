@@ -46,3 +46,22 @@ app.*.map.json
 
 *.g.dart
 *.freezed.dart
+
+build/
+*.apk
+*.aab
+*.dex
+*.class
+bin/
+gen/
+local.properties
+.gradle/
+*.log
+*.iml
+.idea/
+*.cpp
+*cmake
+
+/android
+/ios
+/web
