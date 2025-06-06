@@ -1,9 +1,29 @@
 {
-    "items":[
-        {
-            "'id":1,
-            "name":"First Item",
-            "description": "This is first test item"
-        }
-    ]
+  "jobs": [
+    {
+      "id": "1001",
+      "title": "fix electric panel",
+      "status": "inProgress"
+    },
+    {
+      "id": "1002",
+      "title": "Install Water Heater",
+      "status": "inProgress"
+    },
+    {
+      "id": "1003",
+      "title": "Repair Roof Leak",
+      "status": "completed"
+    },
+    {
+      "id": "1004",
+      "title": "Replace Light Fixtures",
+      "status": "pending"
+    },
+    {
+      "id": "1005",
+      "title": "Test Fire Alarm",
+      "status": "inProgress"
+    }
+  ]
 }
