@@ -1,11 +1,7 @@
-import 'package:afs_mock_project/common/controllers/error_controller.dart';
-import 'package:afs_mock_project/common/controllers/success_controller.dart';
-import 'package:afs_mock_project/features/jobs/repositories/job_repository.dart';
+import 'package:afs_mock_project/common/index.dart';
+import 'package:afs_mock_project/features/jobs/index.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import '../models/job_model.dart';
-import '../models/job_status.dart';
-import 'filter_state_provider.dart';
 
 final jobNotifierProvider =
     StateNotifierProvider<JobNotifier, AsyncValue<List<JobModel>>>(
@@ -14,20 +10,14 @@ final jobNotifierProvider =
 
 final filteredJobsProvider = Provider<List<JobModel>>((ref) {
   final filter = ref.watch(filterStateProvider);
-  final jobsState = ref.watch(jobNotifierProvider);
+  final jobs = ref.watch(jobNotifierProvider).asData?.value ?? [];
 
-  return jobsState.maybeWhen(
-    data: (jobs) {
-      return jobs.where((job) {
-        final matchesQuery =
-            job.title.toLowerCase().contains(filter.searchQuery.toLowerCase());
-        final matchesStatus =
-            filter.status == null || job.status == filter.status;
-        return matchesQuery && matchesStatus;
-      }).toList();
-    },
-    orElse: () => [],
-  );
+  return jobs.where((job) {
+    final matchesSearch =
+        job.title.toLowerCase().contains(filter.searchQuery.toLowerCase());
+    final matchesStatus = filter.status == null || job.status == filter.status;
+    return matchesSearch && matchesStatus;
+  }).toList();
 });
 
 class JobNotifier extends StateNotifier<AsyncValue<List<JobModel>>> {

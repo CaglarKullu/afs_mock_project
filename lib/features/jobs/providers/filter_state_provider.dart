@@ -7,12 +7,17 @@ class FilterState {
 
   FilterState({this.searchQuery = '', this.status});
 
-  FilterState copyWith({String? searchQuery, JobStatus? status}) {
+  FilterState copyWith({
+    String? searchQuery,
+    Object? status = _noChange, // magic default to support null
+  }) {
     return FilterState(
       searchQuery: searchQuery ?? this.searchQuery,
-      status: status ?? this.status,
+      status: status == _noChange ? this.status : status as JobStatus?,
     );
   }
+
+  static const _noChange = Object();
 }
 
 final filterStateProvider = StateProvider<FilterState>((ref) => FilterState());
