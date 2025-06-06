@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color _afsPrimary = Color(0xFF1B6CA8);
-  static const Color _afsAccent = Color(0xFF1282A2);
-  static const Color _afsDarkBg = Color(0xFF0A2239);
-  static const Color _afsLightBg = Color(0xFFF5F7FA);
+  static const Color afsPrimary = Color(0xFF1B6CA8);
+  static const Color afsAccent = Color(0xFF1282A2);
+  static const Color afsDarkBg = Color(0xFF0A2239);
+  static const Color afsLightBg = Color(0xFFF5F7FA);
+  static const Color afsChipBg = Color(0xFFC5CAE9);
+  static const Color afsChipSelected = Color(0xFF3949AB);
 
   static final ThemeData light = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
-    primaryColor: _afsPrimary,
-    scaffoldBackgroundColor: _afsLightBg,
+    primaryColor: afsPrimary,
+    scaffoldBackgroundColor: afsLightBg,
+    colorScheme: ColorScheme.light(
+      primary: afsPrimary,
+      secondary: afsAccent,
+      background: afsLightBg,
+    ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: _afsPrimary,
+      backgroundColor: afsPrimary,
       foregroundColor: Colors.white,
     ),
     cardTheme: CardTheme(
@@ -21,7 +29,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: _afsPrimary,
+        backgroundColor: afsPrimary,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
@@ -29,8 +37,19 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
     ),
+    chipTheme: ChipThemeData(
+      backgroundColor: afsChipBg,
+      selectedColor: afsChipSelected,
+      disabledColor: Colors.grey.shade300,
+      secondarySelectedColor: afsPrimary,
+      labelStyle: const TextStyle(color: Colors.black),
+      secondaryLabelStyle: const TextStyle(color: Colors.white),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      brightness: Brightness.light,
+    ),
     snackBarTheme: const SnackBarThemeData(
-      backgroundColor: _afsAccent,
+      backgroundColor: afsAccent,
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -38,11 +57,17 @@ class AppTheme {
   );
 
   static final ThemeData dark = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.dark,
-    primaryColor: _afsPrimary,
-    scaffoldBackgroundColor: _afsDarkBg,
+    primaryColor: afsPrimary,
+    scaffoldBackgroundColor: afsDarkBg,
+    colorScheme: ColorScheme.dark(
+      primary: afsPrimary,
+      secondary: afsAccent,
+      background: afsDarkBg,
+    ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: _afsPrimary,
+      backgroundColor: afsPrimary,
       foregroundColor: Colors.white,
     ),
     cardTheme: CardTheme(
@@ -52,7 +77,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: _afsAccent,
+        backgroundColor: afsAccent,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
@@ -62,12 +87,26 @@ class AppTheme {
       fillColor: const Color(0xFF1E2F40),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
     ),
+    chipTheme: ChipThemeData(
+      backgroundColor: const Color(0xFF3A4A5A),
+      selectedColor: afsPrimary,
+      disabledColor: Colors.grey.shade800,
+      secondarySelectedColor: afsAccent,
+      labelStyle: const TextStyle(color: Colors.white),
+      secondaryLabelStyle: const TextStyle(color: Colors.white),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      brightness: Brightness.dark,
+    ),
     snackBarTheme: const SnackBarThemeData(
-      backgroundColor: _afsAccent,
+      backgroundColor: afsAccent,
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
     ),
   );
 }
