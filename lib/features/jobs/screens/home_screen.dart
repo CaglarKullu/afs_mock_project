@@ -13,8 +13,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final width = Responsive.getContentWidth(context);
-    final themeMode = ref.watch(themeModeProvider);
-    final themeNotifier = ref.read(themeModeProvider.notifier);
+    final themeMode = ref.watch(themeControllerProvider);
+    final themeNotifier = ref.read(themeControllerProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +22,9 @@ class HomeScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: Icon(
-              themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
+              themeMode.mode == ThemeMode.dark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
             ),
             tooltip: 'Toggle Theme',
             onPressed: () => themeNotifier.toggle(),

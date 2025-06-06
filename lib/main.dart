@@ -12,7 +12,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
+    final themeMode = ref.watch(themeControllerProvider);
 
     return MaterialApp(
       title: 'AFS Jobs',
@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
       scrollBehavior: AppScrollBehavior(),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: themeMode,
+      themeMode: themeMode.mode,
       home: const HomeScreen(),
     );
   }
