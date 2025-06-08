@@ -2,15 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:afs_mock_project/features/jobs/index.dart';
 
-class JobFilterBar extends ConsumerWidget {
+class JobFilterBar extends ConsumerStatefulWidget {
   const JobFilterBar({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<JobFilterBar> createState() => _JobFilterBarState();
+}
+
+class _JobFilterBarState extends ConsumerState<JobFilterBar> {
+  late TextEditingController _searchController;
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final filter = ref.watch(filterStateProvider);
     final filterNotifier = ref.read(filterStateProvider.notifier);
     final chipTheme = Theme.of(context).chipTheme;
-
     return Container(
       color: Theme.of(context).colorScheme.surface,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -18,6 +35,7 @@ class JobFilterBar extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
+            controller: _searchController,
             decoration: InputDecoration(
               labelText: 'Search by title',
               prefixIcon: const Icon(Icons.search),
@@ -31,7 +49,7 @@ class JobFilterBar extends ConsumerWidget {
             spacing: 10,
             runSpacing: 10,
             children: [
-              _buildChip(
+              CustomFilterChip(
                 label: 'All',
                 selected: filter.status == null,
                 onTap: () =>
@@ -39,7 +57,7 @@ class JobFilterBar extends ConsumerWidget {
                 chipTheme: chipTheme,
               ),
               ...JobStatus.values.map(
-                (status) => _buildChip(
+                (status) => CustomFilterChip(
                   label: status.label,
                   selected: filter.status == status,
                   onTap: () =>
@@ -53,32 +71,16 @@ class JobFilterBar extends ConsumerWidget {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton.icon(
-              onPressed: () => filterNotifier.state = FilterState(),
+              onPressed: () {
+                _searchController.clear();
+                filterNotifier.state = FilterState();
+              },
               icon: const Icon(Icons.clear),
               label: const Text("Clear Filters"),
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildChip({
-    required String label,
-    required bool selected,
-    required VoidCallback onTap,
-    required ChipThemeData chipTheme,
-  }) {
-    return FilterChip(
-      label: Text(
-        label,
-        style: selected ? chipTheme.secondaryLabelStyle : chipTheme.labelStyle,
-      ),
-      selected: selected,
-      selectedColor: chipTheme.selectedColor,
-      backgroundColor: chipTheme.backgroundColor,
-      shape: chipTheme.shape,
-      onSelected: (_) => onTap(),
     );
   }
 }
