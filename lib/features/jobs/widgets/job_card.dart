@@ -30,7 +30,7 @@ class JobCard extends ConsumerWidget {
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
               tooltip: 'Delete',
-              onPressed: () => confirmDelete,
+              onPressed: () => confirmDelete(),
             ),
           ],
         ),
