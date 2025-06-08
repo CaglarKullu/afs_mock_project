@@ -2,6 +2,12 @@
 
 This is a **mock Flutter application** built for the AFS Flutter Developer recruitment task. It demonstrates CRUD operations (Create, Read, Update, Delete) on job entries, with responsive design, error handling, and filtering capabilities.
 
+Video Demo:
+
+https://github.com/user-attachments/assets/c1cfd8a8-d154-498d-bc2c-0f2846dbfcc9
+
+
+
 ## ✨ Features
 
 - ✅ Add, edit, and delete jobs with title and status.
