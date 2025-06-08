@@ -22,38 +22,10 @@ class JobListScreen extends ConsumerWidget {
                   separatorBuilder: (_, __) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final job = jobs[index];
-                    return Card(
-                      child: ListTile(
-                        title: Text(job.title),
-                        subtitle: Text(job.status.label),
-                        leading: Icon(
-                          job.status.iconData,
-                          color: job.status.color,
-                        ),
-                        trailing: Wrap(
-                          spacing: 12,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit, color: Colors.blue),
-                              tooltip: 'Edit',
-                              onPressed: () {
-                                ref.read(selectedJobProvider.notifier).state =
-                                    job;
-                                Scrollable.ensureVisible(
-                                  context,
-                                  duration: const Duration(milliseconds: 300),
-                                );
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              tooltip: 'Delete',
-                              onPressed: () =>
-                                  _confirmDelete(context, jobNotifier, job),
-                            ),
-                          ],
-                        ),
-                      ),
+                    return JobCard(
+                      job: job,
+                      confirmDelete: () =>
+                          _confirmDelete(context, jobNotifier, job),
                     );
                   },
                 ),
