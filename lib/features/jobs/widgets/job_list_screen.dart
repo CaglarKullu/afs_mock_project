@@ -27,8 +27,8 @@ class JobListScreen extends ConsumerWidget {
                         title: Text(job.title),
                         subtitle: Text(job.status.label),
                         leading: Icon(
-                          _statusIcon(job.status),
-                          color: _statusColor(job.status),
+                          job.status.iconData,
+                          color: job.status.color,
                         ),
                         trailing: Wrap(
                           spacing: 12,
@@ -84,16 +84,4 @@ class JobListScreen extends ConsumerWidget {
       ),
     );
   }
-
-  IconData _statusIcon(JobStatus status) => switch (status) {
-        JobStatus.pending => Icons.hourglass_empty,
-        JobStatus.inProgress => Icons.build_circle,
-        JobStatus.completed => Icons.check_circle,
-      };
-
-  Color _statusColor(JobStatus status) => switch (status) {
-        JobStatus.pending => Colors.orange,
-        JobStatus.inProgress => Colors.blue,
-        JobStatus.completed => Colors.green,
-      };
 }
