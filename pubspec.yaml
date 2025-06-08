@@ -1,5 +1,5 @@
 name: afs_mock_project
-description: "A new Flutter project."
+description: "A mock project for job application"
 publish_to: 'none'
 version: 0.1.0
 
@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.6.1
   freezed_annotation: ^3.0.0
+  http: ^1.4.0
   json_annotation: ^4.9.0
   uuid: ^4.5.1
 
